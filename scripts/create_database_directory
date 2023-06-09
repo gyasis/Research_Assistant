@@ -1,0 +1,28 @@
+import os
+
+def create_database_directory(db_name, db_description):
+    # Define root directories
+    root_data_folder = os.path.join(os.getcwd(), 'data')
+    root_file_folder = os.path.join(os.getcwd(), 'uploads')
+    
+    # Create subdirectories for the new database
+    data_folder = os.path.join(root_data_folder, db_name)
+    file_folder = os.path.join(root_file_folder, db_name)
+
+    # If the directories don't exist, create them
+    os.makedirs(data_folder, exist_ok=True)
+    os.makedirs(file_folder, exist_ok=True)
+
+    # Define persist directory
+    persist_directory = os.path.join(data_folder, 'multiple')
+
+    # Save the description to a text file
+    with open(os.path.join(data_folder, 'description.txt'), 'w') as f:
+        f.write(db_description)
+        
+    return file_folder, persist_directory
+
+# Usage:
+db_name = "your_database_name"  # Replace with the name you want
+db_description = "Your description goes here"  # Replace with your description
+file_folder, persist_directory = create_database_directory(db_name, db_description)

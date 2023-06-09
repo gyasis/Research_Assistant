@@ -1,0 +1,145 @@
+<!-- templates/index.html -->
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
+
+<head>
+  {% include 'head.html' %}
+
+</head>
+
+<body>
+
+  <!-- Title bar -->
+  {% include 'navbar.html' %}
+
+  <!-- Sidebar -->
+  {% include 'sidebar.html' %}
+
+  <!-- Main content -->
+  {% include 'main_content.html' %}
+
+  <!-- Welcome Modal -->
+  {% include 'welcome_modal.html' %}
+
+  {% if files_exist %}
+    <!-- Second Modal -->
+    {% include 'second_modal.html' %}
+  {% endif %}
+
+  <!-- Footer -->
+  {% include 'footer.html' %}
+   
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous">
+  </script>
+
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+  <script>
+    // Show the welcome modal when the page loads
+    window.addEventListener('DOMContentLoaded', (event) => {
+      var welcomeModal = new bootstrap.Modal(document.getElementById('welcomeModal'), {
+        keyboard: false
+      });
+      welcomeModal.show();
+
+      {% if files_exist %}
+      welcomeModal._element.addEventListener('hidden.bs.modal', (event) => {
+        setTimeout(function() {
+          var secondModal = new bootstrap.Modal(document.getElementById('secondModal'), {
+            keyboard: false
+          });
+          secondModal.show();
+        }, 500); // Delay of 500ms
+      });
+      
+      {% endif %}
+    });
+  </script>
+
+  <script>
+    function toggleConsole() {
+      var consoleDiv = document.getElementById('console');
+      if (consoleDiv.style.display === "none") {
+        consoleDiv.style.display = "block";
+      } else {
+        consoleDiv.style.display = "none";
+      }
+    }
+    
+  </script>
+  <script>
+    var socket = io.connect('http://' + document.domain + ':' + location.port);
+    socket.on('output', function(msg) {
+        // Assuming 'console' is the ID of your console element
+        var consoleDiv = document.getElementById('console');
+        consoleDiv.textContent += msg + '\n';
+        consoleDiv.scrollTop = consoleDiv.scrollHeight;  // Auto-scroll to the bottom
+    });
+
+
+  </script>
+  <script>
+    function resumeSession() {
+        fetch('/resume_session', { method: 'POST' });
+    }
+    </script>
+    
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        var navLink = document.querySelectorAll('.icon-button-bar .nav-link');
+    
+        navLink.forEach(function (link) {
+          link.addEventListener('click', function (e) {
+            e.preventDefault();
+            navLink.forEach(function (link) {
+              var collapse = document.querySelector(link.getAttribute('href'));
+              if (collapse && collapse.classList.contains('show')) {
+                var bsCollapse = new bootstrap.Collapse(collapse, {
+                  toggle: false
+                });
+                bsCollapse.hide();
+                link.parentElement.classList.remove('active');
+              }
+            });
+            setTimeout(function () {
+              var collapse = document.querySelector(e.target.getAttribute('href'));
+              if (collapse) {
+                var bsCollapse = new bootstrap.Collapse(collapse);
+                bsCollapse.toggle();
+                e.target.parentElement.classList.add('active');
+              }
+            }, 0);
+          });
+        });
+      });
+    </script>
+    <script>
+
+      $(document).ready(function() {
+        // Listen for show event on each tab panel
+        $('.tab-content .collapse').on('show.bs.collapse', function () {
+            $('.content').css('margin-left', '350px');
+        });
+    
+        // Listen for hide event on each tab panel
+        $('.tab-content .collapse').on('hide.bs.collapse', function () {
+            $('.content').css('margin-left', '20px');
+        });
+    });
+    
+
+    </script>
+  
+  
+  
+  
+  
+</body>
+
+</html>

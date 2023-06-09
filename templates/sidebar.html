@@ -1,0 +1,174 @@
+<div class="d-flex">
+    <div class="icon-button-bar">
+        <ul class="nav nav-pills d-flex flex-column">
+            <!-- ... Icon Buttons ... -->
+            <li class="nav-item">
+                <a class="nav-link icon-button " id="v-pills-options-tab" data-bs-toggle="collapse" href="#v-pills-options"
+                    role="tab" aria-controls="v-pills-options" aria-selected="false">
+                    <i class="lni lni-home"></i>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link icon-button" id="v-pills-docs-tab" data-bs-toggle="collapse" href="#v-pills-docs"
+                    role="tab" aria-controls="v-pills-docs" aria-selected="false">
+                    <i class="lni lni-book"></i>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link icon-button" id="v-pills-preferences-tab" data-bs-toggle="collapse"
+                    href="#v-pills-preferences" role="tab" aria-controls="v-pills-preferences" aria-selected="false">
+                    <i class="lni lni-cog"></i>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link icon-button" id="v-pills-models-tab" data-bs-toggle="collapse" href="#v-pills-models"
+                    role="tab" aria-controls="v-pills-models" aria-selected="false">
+                    <i class="lni lni-layers"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="tab-content" id="v-pills-tabContent">
+        <div class="collapse collapse-horizontal" id="v-pills-options" role="tabpanel" aria-labelledby="v-pills-options-tab">
+            <!-- Insert your HTML code here for options tab -->
+            <div class="sidebar">
+                <div class="form-check form-switch">
+                    <label class="form-check-label text-light" id="toggleLabel"
+                        for="flexSwitchCheckDefault">Public</label>
+                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault"
+                        onchange="updateLabel(this)">
+                </div>
+                <p id="toggleDescription" class="text-light">Public mode is faster and more accurate as it uses online
+                    APIs. However, it may expose your data and accumulate costs for using the APIs.</p>
+                <div class="form-check form-switch">
+                    <label class="form-check-label text-light" id="ingestLabel" for="ingestSwitch">Ingest</label>
+                    <input class="form-check-input" type="checkbox" id="ingestSwitch" onchange="ingestData(this)">
+                </div>
+                <p id="ingestDescription" class="text-light">Ingesting documents into the local database and tokenizing
+                    them is necessary for Private mode. This process may take some time, so feel free to grab a cup of
+                    coffee. Public mode is available for quick usage.</p>
+                <div class="form-check form-switch">
+                    <label class="form-check-label text-light" id="sourcesLabel" for="sourcesSwitch">Sources</label>
+                    <input class="form-check-input" type="checkbox" id="sourcesSwitch" onchange="toggleSources(this)">
+                </div>
+                <p id="sourcesDescription" class="text-light">The sources section displays the source documents used to
+                    generate the answer. This provides transparency and allows for verification of the information
+                    provided.</p>
+                <div class="form-check form-switch">
+                    <label class="form-check-label text-light" id="debugLabel" for="debugSwitch">Debug</label>
+                    <input class="form-check-input" type="checkbox" id="debugSwitch" onchange="toggleDebug(this)">
+                </div>
+                <p id="debugDescription" class="text-light">The debug section provides detailed information about the
+                    internal workings of the application. This can be useful for troubleshooting and understanding how
+                    the application processes data.</p>
+            </div>
+        </div>
+        <div class="collapse collapse-horizontal" id="v-pills-docs" role="tabpanel" aria-labelledby="v-pills-docs-tab">
+            <!-- Content for docs tab goes here -->
+        </div>
+
+        <div class="collapse collapse-horizontal" id="v-pills-preferences" role="tabpanel" aria-labelledby="v-pills-preferences-tab">
+            <!-- Content for preferences tab goes here -->
+        </div>
+
+        <div class="collapse collapse-horizontal" id="v-pills-models" role="tabpanel" aria-labelledby="v-pills-models-tab">
+            <div class="sidebar">
+                <h5 class="text-light">Chat and Completion Models</h5>
+                <!-- Chat and Completion Models Here -->
+                <div class="form-check">
+                    <label class="form-check-label text-light" for="gpt-4">gpt-4</label>
+                    <input class="form-check-input" type="radio" name="chatCompletionModel" id="gpt-4" value="gpt-4">
+
+                </div>
+                <div class="form-check">
+                    <label class="form-check-label text-light" for="gpt-4-0314">gpt-4-0314</label>
+                    <input class="form-check-input" type="radio" name="chatCompletionModel" id="gpt-4-0314"
+                        value="gpt-4-0314">
+
+                </div>
+                <div class="form-check">
+                    <label class="form-check-label text-light" for="gpt-4-32k">gpt-4-32k</label>
+                    <input class="form-check-input" type="radio" name="chatCompletionModel" id="gpt-4-32k"
+                        value="gpt-4-32k">
+
+                </div>
+                <div class="form-check">
+                    <label class="form-check-label text-light" for="gpt-4-32k-0314">gpt-4-32k-0314</label>
+                    <input class="form-check-input" type="radio" name="chatCompletionModel" id="gpt-4-32k-0314"
+                        value="gpt-4-32k-0314">
+
+                </div>
+                <div class="form-check">
+                    <label class="form-check-label text-light" for="gpt-3.5-turbo">gpt-3.5-turbo</label>
+                    <input class="form-check-input" type="radio" name="chatCompletionModel" id="gpt-3.5-turbo"
+                        value="gpt-3.5-turbo">
+
+                </div>
+                <div class="form-check">
+                    <label class="form-check-label text-light" for="gpt-3.5-turbo-0301">gpt-3.5-turbo-0301</label>
+                    <input class="form-check-input" type="radio" name="chatCompletionModel" id="gpt-3.5-turbo-0301"
+                        value="gpt-3.5-turbo-0301">
+
+                </div>
+                <br>
+                <h5 class="text-light">Completions Models</h5>
+                <!-- Completions Models Here -->
+                <div class="form-check">
+                    <label class="form-check-label text-light" for="text-davinci-003">text-davinci-003</label>
+                    <input class="form-check-input" type="radio" name="completionModel" id="text-davinci-003"
+                        value="text-davinci-003">
+
+                </div>
+                <div class="form-check">
+                    <label class="form-check-label text-light" for="text-davinci-002">text-davinci-002</label>
+                    <input class="form-check-input" type="radio" name="completionModel" id="text-davinci-002"
+                        value="text-davinci-002">
+
+                </div>
+                <div class="form-check">
+                    <label class="form-check-label text-light" for="text-curie-001">text-curie-001</label>
+                    <input class="form-check-input" type="radio" name="completionModel" id="text-curie-001"
+                        value="text-curie-001">
+
+                </div>
+                <div class="form-check">
+                    <label class="form-check-label text-light" for="text-babbage-001">text-babbage-001</label>
+                    <input class="form-check-input" type="radio" name="completionModel" id="text-babbage-001"
+                        value="text-babbage-001">
+
+                </div>
+                <div class="form-check">
+                    <label class="form-check-label text-light" for="text-ada-001">text-ada-001</label>
+                    <input class="form-check-input" type="radio" name="completionModel" id="text-ada-001"
+                        value="text-ada-001">
+
+                </div>
+                <br>
+
+                <h5 class="text-light">Embedding Models</h5>
+                <!-- Embedding Models Here -->
+                <div class="form-check">
+                    <label class="form-check-label text-light"
+                        for="text-embedding-ada-002">text-embedding-ada-002</label>
+                    <input class="form-check-input" type="radio" name="embeddingModel" id="text-embedding-ada-002"
+                        value="text-embedding-ada-002">
+
+                </div>
+                <div class="form-check">
+                    <label class="form-check-label text-light"
+                        for="text-search-ada-doc-001">text-search-ada-doc-001</label>
+                    <input class="form-check-input" type="radio" name="embeddingModel" id="text-search-ada-doc-001"
+                        value="text-search-ada-doc-001">
+
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+
+
+
+</div>

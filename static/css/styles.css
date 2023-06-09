@@ -1,0 +1,299 @@
+    /* styles.css */
+    
+    .modal-content {
+        /* Make the modal 600px tall */
+    }
+    
+    .modal-dialog {
+        max-width: 66%;
+        margin: auto;
+    }
+    
+    .modal-body {
+        font-size: 1.12em;
+    }
+    
+    .navbar {
+        display: flex;
+        /* Use flexbox */
+        justify-content: space-between;
+        /* Align items to the left and right */
+    }
+    
+    .navbar .navbar-nav {
+        flex-direction: row;
+        /* Make the navigation items horizontal */
+    }
+    
+    .navbar .navbar-nav .nav-item {
+        margin-right: 20px;
+        /* Add some margin to the right of each link */
+    }
+    
+    .sidebar {
+        width: 320px;
+        height: 100vh;
+        padding: 10px 20px 20px 10px;
+        /* top, right, bottom, left */
+        background-color: #343a40;
+        overflow-y: auto;
+        top: 0;
+    }
+    
+    .content {
+        margin-left: 20px;
+        position: absolute;
+        left: 20px;
+        top: 60px;
+        width: 70%;
+        padding: 20px;
+    }
+    
+    .form-check-input {
+        transform: scale(1.5);
+    }
+    
+    .form-check-label {
+        padding-left: 0;
+        /* font-weight: bold; */
+        line-height: 1.5;
+    }
+    
+    .form-check {
+        padding-left: 0;
+        display: flex;
+        justify-content: space-between;
+    }
+    
+    .footer {
+        position: fixed;
+        right: 0;
+        bottom: 0;
+        padding: 10px;
+        width: calc(100% - 350px);
+        /* Subtract the width of the sidebar */
+        background-color: #343a40;
+        /* Add a background color to the footer */
+        display: flex;
+        /* Use flexbox */
+        justify-content: space-between;
+        /* Align items to the left and right */
+    }
+    
+    .console {
+        position: fixed;
+        bottom: 50px;
+        /* Adjust this value to accommodate the height of your footer */
+        width: calc(100% - 350px);
+        /* Subtract the width of the sidebar */
+        height: 33vh;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.5);
+        color: white;
+        padding: 10px 20px 10px 10px;
+        /* Add a right padding */
+        display: none;
+    }
+    
+    .custom-modal-width {
+        max-width: 30%;
+        margin: auto;
+    }
+    /* static/css/styles.css */
+    
+    .chat-container {
+        position: sticky;
+        left: 370px;
+        bottom: 60px;
+        width: 70%;
+        /* Adjust as needed */
+        height: 90%;
+        /* Adjust as needed */
+        border: none;
+    }
+    
+    #chat-window {
+        /* Existing styles */
+        overflow-y: auto;
+        border: none;
+        height: 90%;
+        /* Hide scrollbar for Chrome, Safari and Opera */
+         ::-webkit-scrollbar {
+            display: none;
+        }
+        /* Hide scrollbar for IE, Edge and Firefox */
+        -ms-overflow-style: none;
+        /* IE and Edge */
+        scrollbar-width: none;
+        /* Firefox */
+    }
+    
+    .chat-input {
+        position: sticky;
+        /* Position it relative to the chat-container */
+        bottom: 0;
+        /* Align it at the bottom */
+        height: 50px;
+        /* Set a static height */
+        width: 100%;
+        /* Make it span the entire width of the chat-container */
+        display: flex;
+        border: none;
+    }
+    
+    #chat-input-field {
+        flex-grow: 1;
+        border: none;
+        margin-right: 10px;
+        padding-left: 10px;
+    }
+    
+    #chat-send-button {
+        width: 100px;
+    }
+    
+    .user-message {
+        background: #333;
+        color: white;
+        padding: 10px;
+        margin: 10px 10px 10px 75px;
+        border-radius: 10px;
+        text-align: right;
+    }
+    
+    .bot-message {
+        background: #191919;
+        color: white;
+        padding: 10px;
+        margin: 10px 75px 10px 10px;
+        border-radius: 10px;
+        text-align: left;
+    }
+    
+    .nav-pills {
+        width: 350px;
+        background-color: #343a40;
+        height: 100vh;
+        /* padding: 20px; */
+        color: white
+    }
+    /* Other CSS code */
+    
+    .nav-pills .nav-link {
+        width: 50px;
+        height: 50px;
+        text-align: center;
+    }
+    
+    .nav-pills .nav-link .lni {
+        display: block;
+        margin: 0 auto;
+    }
+    
+    .icon-button {
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 0;
+        /* remove the border radius */
+    }
+    
+    .icon-button .lni {
+        font-size: 24px;
+    }
+    
+    .icon-button.active {
+        background: #495057;
+    }
+    
+    .d-flex {
+        width: 100%;
+    }
+    
+    .icon-button-bar {
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        background-color: #343a40;
+    }
+    
+    .tab-content {
+        /* Adjusted to remove the gap between the sidebar and the main content */
+        width: calc(100% - 350px);
+        /* Adjusted to fill the remaining width */
+    }
+    
+    .user-message .lni {
+        margin-right: 30px;
+        /* Add other styles as needed */
+    }
+    
+    .bot-message .lni {
+        margin-right: 30px;
+        /* Add other styles as needed */
+    }
+    
+    .user-message .lni-user,
+    .bot-message .lni-suspect {
+        font-size: 24px;
+        /* Adjust the icon size as per your requirement */
+        padding: 10px;
+        /* Add some padding to give some room around the icon */
+        border-radius: 10%;
+        /* Make the background circular */
+        margin: 0px 10px 0px 0px;
+        /* Add some space between the icon and the text */
+    }
+    
+    .user-message .lni-user {
+        background-color: #0084ff;
+        /* Set the background color for the user icon */
+        color: #fff;
+        /* Set the icon color */
+    }
+    
+    .bot-message .lni-suspect {
+        background-color: #601c1c;
+        /* Set the background color for the bot icon */
+        color: #fff;
+        /* Set the icon color */
+    }
+    
+    .user-message,
+    .bot-message {
+        display: flex;
+        justify-content: space-between;
+    }
+    
+    .user-message .message-content,
+    .bot-message .message-content {
+        max-width: calc(100% - 50px);
+        /* Subtract the icon container width */
+        word-wrap: break-word;
+    }
+    
+    .user-message .icon-container,
+    .bot-message .icon-container {
+        width: 50px;
+        /* Set a fixed width for the icon container */
+    }
+    /* ... other CSS styles for the icons ... */
+    /* This stops the collapsing animation from bootstrap for sidebar buttons */
+    
+    .collapsing {
+        -webkit-transition: none !important;
+        -moz-transition: none !important;
+        -o-transition: none !important;
+        transition: none !important;
+    }
+    
+    .nav-item.active {
+        background-color: #022e5b;
+        /* Change this to whatever color you want */
+    }
+    /* styles.css */
+    /* Define the initial state of the content div */

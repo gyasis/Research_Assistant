@@ -1,0 +1,83 @@
+<!-- templates/chat.html -->
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
+
+<head>
+ {% include 'head.html' %}
+</head>
+
+<body>
+
+  <!-- Title bar -->
+  {% include 'navbar.html' %}
+
+  <!-- Sidebar -->
+  {% include 'sidebar.html' %}
+
+  <!-- Main content -->
+  {% include 'chat_interface.html' %}
+
+  <!-- Footer -->
+  {% include 'footer.html' %}
+   
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous">
+</script>
+  
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+  
+
+  <!-- ... -->
+
+  <!-- Custom JS -->
+  <script src="{{ url_for('static', filename='js/chat.js') }}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  <script>
+    $(document).ready(function() {
+        $('#chat-send-button').click(sendQuestion);
+        $('#chat-input-field').keydown(function(event) {
+            if (event.keyCode == 13) {
+                sendQuestion();
+            }
+        });
+
+        function sendQuestion() {
+            var question = $('#chat-input-field').val();
+            var chat_history = $('#chat-history').children().map(function() {
+                return $(this).text();
+            }).get();
+
+            // Add user's question to the chat window with icon at the end
+            $('#chat-window').append('<div class="user-message"><div class="message-content">' + question + '</div><div class="icon-container"><i class="lni lni-user"></i></div></div>');
+
+            $.ajax({
+                type: 'POST',
+                url: '/chat_message',
+                data: JSON.stringify({message: question, chat_history: chat_history}),
+                contentType: 'application/json;charset=UTF-8',
+                success: function(data) {
+                    var response = data.answer;
+
+                    // Add bot's response to the chat window with icon at the start
+                    $('#chat-window').append('<div class="bot-message"><div class="icon-container"><i class="lni lni-suspect"></i></div><div class="message-content">' + response + '</div></div>');
+
+                    $('#chat-input-field').val('');
+                    $('#chat-input-field').focus();
+                }
+            });
+        }
+    });
+</script>
+
+
+
+
+
+</body>
+
+</html>
