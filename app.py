@@ -19,11 +19,13 @@ from pathlib import Path
 import os
 import sqlite3
 import pickle
+from scripts.file_uploader import upload_files
+from scripts.web_scraper import scrape_webpage_text
 
+# Import the API-Key from the config file
+from config import API_KEY
 
-# Set your API key
-# REMEMBER TO REMOVE THIS CODE AND SET AND ENVIRONMENT VARIABLE
-os.environ["OPENAI_API_KEY"] = "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"
+os.environ["OPENAI_API_KEY"] = API_KEY
  # %%
 app = Flask(__name__)
 socketio = SocketIO(app, async_mode='eventlet')
@@ -111,7 +113,7 @@ template = """
 
 
 #This should always be the default step regardless of resuming session or starting a new one
-parent_directory = os.path.join(os.getcwd(), '..')
+parent_directory = os.path.join(os.getcwd())
 data_folder = os.path.join(parent_directory, 'data')
 file_folder = os.path.join(parent_directory, 'uploads')
 embeddings = OpenAIEmbeddings()
@@ -122,7 +124,7 @@ retriever = vectordb.as_retriever()
 
 @app.route('/')
 def home():
-    directories = ['../data/multiple']  # replace with your actual directories
+    directories = ['data/multiple']  # replace with your actual directories
     files_exist = any(os.listdir(dir) for dir in directories if os.path.isdir(dir))
     if files_exist:
         app.logger.info('Files exist in the directories.')
@@ -200,6 +202,22 @@ def download_transcript_route():
         db.close_connection()
 
     return jsonify({'transcript': transcript})
+
+
+@app.route('/upload', methods=['POST'])
+def upload_route():
+    result = upload_files(request, app.config['UPLOAD_FOLDER'])
+    return result
+
+
+@app.route('/scrape', methods=['POST'])
+def scrape_route():
+    url = request.json.get('url')  # Assuming you're sending the URL as JSON
+    if not url:
+        return 'No URL provided.', 400
+
+    page_text = scrape_webpage_text(url)
+    return page_text
 
 
 if __name__ == '__main__':

@@ -15,9 +15,10 @@ from datetime import datetime
 # %%
 from langchain.chains.question_answering import load_qa_chain
 # %%
-# Set your API key
-os.environ["OPENAI_API_KEY"] = "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"
+# Import the API-Key from the config file
+from config import API_KEY
 
+os.environ["OPENAI_API_KEY"] = API_KEY
 # %%
 data_folder = os.path.join(os.getcwd(), 'data')
 file_folder = os.path.join(os.getcwd(), 'uploads')
@@ -56,7 +57,6 @@ llm = OpenAI()
 from langchain.chains import RetrievalQAWithSourcesChain
 chain = RetrievalQAWithSourcesChain.from_chain_type(OpenAI(temperature=0), chain_type="map_reduce", retriever=retriever)
 # %%
-chain({"question": "What is the effect of cannaboids on psychiatric symptoms"}, return_only_outputs=True)
 
 
 
